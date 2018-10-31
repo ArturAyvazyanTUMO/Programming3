@@ -5,6 +5,7 @@ var saruycArr = [];
 var waterArr = [];
 var matrix = [];
 
+// Kecce maisi 9y
 
 var chance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 3, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 var side = 20;
