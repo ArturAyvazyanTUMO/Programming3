@@ -68,8 +68,7 @@ class Gishatich extends LivingCreature {
         }
     }
 
-    mahanal(s) {
-        return super.mahanal(s);
-        gishatichArr.splice(s, 1);
+    mahanal(index) {
+        return super.mahanal(index,gishatichArr);
     }
 }

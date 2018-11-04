@@ -16,8 +16,7 @@ class Saruyc extends LivingCreature {
         }
     }
 
-    halvel(s) {
-        return super.mahanal(s);
-        saruycArr.splice(s, 1);
+    halvel(index) {
+        return super.mahanal(index,saruycArr);
     }
 }

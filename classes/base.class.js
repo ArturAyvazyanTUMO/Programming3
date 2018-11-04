@@ -42,7 +42,8 @@ class LivingCreature {
         return found;
     }
 
-    mahanal(s) {
+    mahanal(index,fromWhichArrayToSplice) {
         matrix[this.y][this.x] = 0;
+        fromWhichArrayToSplice.splice(index, 1);
     }
 }

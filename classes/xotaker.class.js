@@ -47,8 +47,7 @@ class Xotaker extends LivingCreature {
         }
     }
 
-    mahanal(s) {
-        return super.mahanal(s);
-        xotakerArr.splice(s, 1);
+    mahanal(index) {
+        return super.mahanal(index,xotakerArr);
     }
 }
