@@ -111,7 +111,7 @@ function draw() {
         if (arrays.saruycArr[i].frames >= fps / 10)
             arrays.saruycArr[i].halvel(i, arrays.saruycArr);
     }
-    console.table(matrix);
+    console.log(matrix);
 }
 
 
