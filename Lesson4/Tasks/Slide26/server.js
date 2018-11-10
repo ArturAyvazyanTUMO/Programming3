@@ -8,6 +8,8 @@ var messages = [];
  
 let jsonData = JSON.parse(fs.readFileSync('messages.json'));  
 
+console.log(jsonData);
+
 app.use('/',express.static(__dirname+"/public"));
 io.on('connection', function (socket) {
     for(var i in messages) {
@@ -18,7 +20,7 @@ io.on('connection', function (socket) {
         io.sockets.emit("display message", data);
         jsonData.messages=messages;
         var json = JSON.stringify(jsonData);
-        fs.writeFileSync('messages.json', json);
+        fs.writeFileSync('messages.json', json)
     });
  });
  
