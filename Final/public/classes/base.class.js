@@ -12,6 +12,7 @@ class LivingCreature {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+        this.arrayOrder=[null,grassArr,xotakerArr,gishatichArr,saruycArr,waterArr,eventObjects];
     }
 
     stanalNorKordinatner() {

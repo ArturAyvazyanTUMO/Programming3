@@ -37,6 +37,8 @@ class Gishatich extends LivingCreature {
                     xotakerArr.splice(i, 1);
                 }
             }
+        }else{
+            norVandak=random(this.yntrelVandak(7));
         }
     }
 

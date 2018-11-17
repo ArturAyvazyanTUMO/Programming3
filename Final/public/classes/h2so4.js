@@ -34,8 +34,6 @@ class Xotaker extends LivingCreature {
                     break;
                 }
             }
-        }else{
-            norVandak=random(this.yntrelVandak(8));
         }
     }
 
