@@ -8,8 +8,6 @@ var fs = require('fs');
 
 var statistics = JSON.parse(fs.readFileSync('statistics.json','utf8'));
 
-console.log(statistics);
-
 app.use('/', express.static('public'))
 
 app.set('view engine', 'ejs');
