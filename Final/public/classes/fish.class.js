@@ -31,6 +31,7 @@ class Fish extends LivingCreature {
             for (var i in waterGrassArr) {
                 if (waterGrassArr[i].x == this.x && waterGrassArr[i].y == this.y) {
                     waterGrassArr.splice(i, 1);
+                    statistics.waterGrassDieCount++;
                     break;
                 }
             }
@@ -41,7 +42,6 @@ class Fish extends LivingCreature {
     bazmanal() {
         var norVandak = random(this.yntrelVandak(0));
         var anotherFish=random(this.yntrelVandak(7));
-        var foundedObj;
         this.turn = 0;
         if (norVandak) {
             if(anotherFish){

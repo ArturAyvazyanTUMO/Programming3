@@ -8,7 +8,47 @@ var eventObjects = [];
 var fishArr = [];
 var waterGrassArr = [];
 
+var socket = io();
+
 // Kecce maisi 9y
+
+var statistics={
+    fps:0,
+    windowWidth:0,
+    windowHeight:0,
+    side:0,
+    frameWhenEventWillPlay:0,
+    gameIsRunning:false,
+    eventWasPlayed:false,
+    grassCount:0,
+    xotakerCount:0,
+    gishatichCount:0,
+    saruycCount:0,
+    waterCount:0,
+    fishCount:0,
+    waterGrassCount:0,
+    grassMultiplyCount:0,
+    xotakerMultiplyCount:0,
+    fishMultiplyCount:0,
+    waterMultiplyCount:0,
+    waterGrassMultiplyCount:0,
+    grassDieCount:0,
+    xotakerDieCount:0,
+    gishatichDieCount:0,
+    saruycDieCount:0,
+    waterDieCount:0,
+    fishDieCount:0,
+    waterGrassDieCount:0,
+    xotakerEatCount:0,
+    gishatichEatCount:0,
+    gishatichDrinkCount:0,
+    fishEatCount:0,
+    xotakerMoveCount:0,
+    gishatichMoveCount:0,
+    fishMoveCount:0,
+    currentWeather:"",
+    framesPassed:0
+}
 
 var chance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 3, 4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var side = 20;
@@ -44,7 +84,8 @@ function setup() {
             matrix[y][x] = random(chance);
         }
     }
-    frameRate(30);
+    let fpsCount=30;
+    frameRate(fpsCount);
     var canvas = createCanvas(col * side, row * side);
     background('#acacac');
     for (var y = 0; y < matrix.length; ++y) {
@@ -80,17 +121,47 @@ function setup() {
         }
     }
     textSize(50);
+
+    //statistics part in setup function
+    statistics.fps=fpsCount;
+    statistics.windowWidth=windowWidth;
+    statistics.windowHeight=windowHeight;
+    statistics.side=side;
+    statistics.frameWhenEventWillPlay=whenUniqueEventWillPlay;
+    statistics.grassCount=grassArr.length;
+    statistics.xotakerCount=xotakerArr.length;
+    statistics.gishatichCount=gishatichArr.length;
+    statistics.saruycCount=saruycArr.length;
+    statistics.waterCount=waterArr.length;
+    statistics.fishCount=fishArr.length,
+    statistics.waterGrassCount=waterGrassArr.length;
 }
 
 function draw() {
+    //statistics part in draw function
+    statistics.grassCount=grassArr.length;
+    statistics.xotakerCount=xotakerArr.length;
+    statistics.gishatichCount=gishatichArr.length;
+    statistics.saruycCount=saruycArr.length;
+    statistics.waterCount=waterArr.length;
+    statistics.fishCount=fishArr.length,
+    statistics.waterGrassCount=waterGrassArr.length;
+    statistics.framesPassed=TotalFramesPassed;
+    statistics.gameIsRunning=playGame;
+    statistics.currentWeather=currentWeather;
+    //Send statistics
     textFont('Archivo Black');
     if (playGame) {
         weatherFramedPassed++;
         TotalFramesPassed++;
+        if(TotalFramesPassed%60==0){
+            socket.emit('get statistics', statistics);
+        }
         noStroke();
         if (TotalFramesPassed == whenUniqueEventWillPlay) {
             evnt = new UniqueEvent(Math.floor(random(0, matrix[0].length - 1)), Math.floor(random(0, matrix.length - 1)));
             eventObjects.push(evnt);
+            statistics.eventWasPlayed=true;
         }
         if (weatherFramedPassed == 50) {
             changeWeather();
@@ -99,9 +170,11 @@ function draw() {
 
         if (TotalFramesPassed >= 70 && TotalFramesPassed <= 100) {
             convertTheCharacter(waterArr, fishArr, Fish);
+            statistics.waterDieCount++;
         }
         if (TotalFramesPassed >= 40 && TotalFramesPassed <= 200) {
             convertTheCharacter(waterArr, waterGrassArr, WaterGrass);
+            statistics.waterDieCount++;
         }
         for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
@@ -136,7 +209,7 @@ function draw() {
                     rect(x * side, y * side, side, side);
                 }
                 else if (matrix[y][x] == 8) {
-                    fill("grey");
+                    fill([70,70,0]);
                     rect(x * side, y * side, side, side);
                 }
                 else if (matrix[y][x] == 0) {
@@ -160,22 +233,33 @@ function draw() {
         for (var i in grassArr) {
             if (currentWeather != "Winter") {
                 grassArr[i].bazmanal();
+                statistics.grassMultiplyCount++;
             }
         }
+
+        for(var i in waterGrassArr){
+            waterGrassArr[i].bazmanal();
+            statistics.waterGrassMultiplyCount++;
+        }
+
         for (var i in xotakerArr) {
             var xotka = random(xotakerArr[i].yntrelVandak(1));
             if (xotakerArr[i] && (xotakerArr[i].chutel >= xotakerInDiffWeathers.turnsToDie)) {
                 xotakerArr[i].mahanal(i);
+                statistics.xotakerDieCount++;
+                console.log(statistics.xotakerDieCount);
             }
             else if (xotakerArr[i] && xotakerArr[i].turn >= xotakerInDiffWeathers.turnsToMultiply) {
-                xotakerArr[i].utel();
                 xotakerArr[i].bazmanal();
+                statistics.xotakerMultiplyCount++;
             }
             else if (xotakerArr[i] && xotka) {
                 xotakerArr[i].utel();
+                statistics.xotakerEatCount++;
             }
             else {
                 xotakerArr[i].sharjvel();
+                statistics.xotakerMoveCount++;
             }
         }
 
@@ -183,15 +267,19 @@ function draw() {
             gishatichArr[i].frames++;
             if (gishatichArr[i].frames >= 50) {
                 gishatichArr[i].mahanal(i);
+                statistics.gishatichDieCount++;
             }
             else if (random(gishatichArr[i].yntrelVandak(2))) {
                 gishatichArr[i].utel();
+                statistics.gishatichEatCount++;
             }
             else if (random(gishatichArr[i].yntrelVandak(5))) {
                 gishatichArr[i].xmel();
+                statistics.gishatichDrinkCount++;
             }
             else {
                 gishatichArr[i].sharjvel();
+                statistics.gishatichMoveCount++;
             }
         }
 
@@ -199,6 +287,7 @@ function draw() {
 
         for (var i in waterArr) {
             waterArr[i].main();
+            statistics.waterMultiplyCount++;
         }
 
         for (var i in saruycArr) {
@@ -206,6 +295,7 @@ function draw() {
             var fps = frameRate();
             if (saruycArr[i].frames >= fps * 10) {
                 saruycArr[i].halvel(i);
+                statistics.saruycDieCount++;
             }
         }
 
@@ -213,15 +303,19 @@ function draw() {
             var areThereWaterGrass = random(fishArr[i].yntrelVandak(8));
             if (fishArr[i] && (fishArr[i].chutel >= 250)) {
                 fishArr[i].mahanal(i);
+                statistics.fishDieCount++;
             }
             else if (fishArr[i] && fishArr[i].turn >= 3) {
                 fishArr[i].bazmanal();
+                statistics.fishMultiplyCount++;
             }
             else if (fishArr[i] && areThereWaterGrass) {
                 fishArr[i].utel();
+                statistics.fishEatCount++;
             }
             else {
                 fishArr[i].sharjvel();
+                statistics.fishMoveCount++;
             }
         }
 
@@ -245,20 +339,24 @@ function draw() {
                 waterObject = waterArr[index];
             }
             convertTheCharacter(waterArr, saruycArr, Saruyc);
+            statistics.waterDieCount++;
         }
         else if (currentWeather == "Spring") {
             grassClr = [129, 199, 67];
             convertTheCharacter(saruycArr, waterArr, Water);
+            statistics.saruycDieCount++;
         }
         else if (currentWeather == "Summer") {
             grassClr = [0, 178, 56];
             xotakerInDiffWeathers.turnsToDie = 100;
             xotakerInDiffWeathers.turnsToMultiply = 10;
             convertTheCharacter(waterArr, grassArr, Grass);
+            statistics.waterDieCount++;
         }
         else if (currentWeather == "Autumn") {
             grassClr = [218, 103, 44];
             convertTheCharacter(grassArr, waterArr, Water);
+            statistics.grassDieCount++;
         }
         fill(255);
         stroke(2);

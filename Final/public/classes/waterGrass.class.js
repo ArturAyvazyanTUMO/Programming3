@@ -1,7 +1,13 @@
 class WaterGrass extends LivingCreature {
-    constructor(x, y, directions) {
-        super(x, y, directions);
+    constructor(x, y) {
+        super(x, y);
         this.multiply = 0;
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
     }
 
     bazmanal() {
@@ -13,6 +19,7 @@ class WaterGrass extends LivingCreature {
             for(var i in waterArr){
                 if(waterArr[i].x==norVandak[0]&&waterArr[i].y==norVandak[1]){
                     waterArr.splice(i,1);
+                    statistics.waterDieCount++;
                     break;
                 }
             }

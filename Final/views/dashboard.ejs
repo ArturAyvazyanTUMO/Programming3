@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Statistics</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body class="grey lighten-3">
+    <!-- Purple Header -->
+    <div class="edge-header deep-purple"></div>
+    <!--Main layout-->
+    <main class="pt-5 mx-lg-5 free-bird">
+        <div class="container-fluid mt-5">
+
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-9 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <canvas id="myChart"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-3 mb-4">
+
+                    <!--Card-->
+                    <div class="card mb-4">
+
+                        <!-- Card header -->
+                        <div class="card-header text-center">
+                            Characters count
+                        </div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <canvas id="pieChart"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                    <!--Card-->
+                    <div class="card mb-4">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- List group links -->
+                            <div class="list-group list-group-flush">
+                                <a class="list-group-item list-group-item-action waves-effect">Window Width
+                                    <span class="badge badge-primary badge-pill pull-right">
+                                        <%= statistics.windowWidth %>
+                                    </span>
+                                </a>
+                                <a class="list-group-item list-group-item-action waves-effect">Window Height
+                                    <span class="badge badge-primary badge-pill pull-right">
+                                        <%= statistics.windowHeight %>
+                                    </span>
+                                </a>
+                                <a class="list-group-item list-group-item-action waves-effect">FPS
+                                    <span class="badge badge-primary badge-pill pull-right">
+                                        <%= statistics.fps %>
+                                    </span>
+                                </a>
+                                <a class="list-group-item list-group-item-action waves-effect">Current Weather
+                                    <span class="badge badge-primary badge-pill pull-right">
+                                        <%= statistics.currentWeather %>
+                                    </span>
+                                </a>
+                                <a class="list-group-item list-group-item-action waves-effect">Total Frames Passed
+                                    <span class="badge badge-primary badge-pill pull-right">
+                                        <%= statistics.framesPassed %>
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- List group links -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- Table  -->
+                            <table class="table table-hover">
+                                <!-- Table head -->
+                                <thead class="blue-grey lighten-4">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Value Name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <!-- Table head -->
+
+                                <!-- Table body -->
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Grass Count</td>
+                                        <td><%= statistics.grassCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Xotaker Count</td>
+                                        <td><%= statistics.xotakerCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Gishatich Count</td>
+                                        <td><%= statistics.gishatichCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Saruyc Count</td>
+                                        <td><%= statistics.saruycCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Water Count</td>
+                                        <td><%= statistics.waterCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Fish Count</td>
+                                        <td><%= statistics.fishCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>Water Grass Count</td>
+                                        <td><%= statistics.waterGrassCount %></td>
+                                    </tr>
+                                </tbody>
+                                <!-- Table body -->
+                            </table>
+                            <!-- Table  -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- Table  -->
+                            <table class="table table-hover">
+                                <!-- Table head -->
+                                <thead class="blue lighten-4">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Value Name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <!-- Table head -->
+
+                                <!-- Table body -->
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Grass Multiply Count</td>
+                                        <td><%= statistics.grassMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Xotaker Multiply Count</td>
+                                        <td><%= statistics.xotakerMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Fish Multiply Count</td>
+                                        <td><%= statistics.fishMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Water Multiply Count</td>
+                                        <td><%= statistics.waterMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>WaterGrass Multiply Count</td>
+                                        <td><%= statistics.waterGrassCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                <!-- Table body -->
+                            </table>
+                            <!-- Table  -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- Table  -->
+                            <table class="table table-hover">
+                                <!-- Table head -->
+                                <thead class="red lighten-4">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Value Name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <!-- Table head -->
+
+                                <!-- Table body -->
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Xotaker Eat Count</td>
+                                        <td><%= statistics.xotakerEatCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Gishatich Eat Count</td>
+                                        <td><%= statistics.gishatichEatCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Gishatich Drink Count</td>
+                                        <td><%= statistics.gishatichDrinkCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Fish eat count</td>
+                                        <td><%= statistics.fishEatCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                <!-- Table body -->
+                            </table>
+                            <!-- Table  -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- Table  -->
+                            <table class="table table-hover">
+                                <!-- Table head -->
+                                <thead class="green lighten-4">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Value Name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <!-- Table head -->
+
+                                <!-- Table body -->
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Xotaker Move Count</td>
+                                        <td><%= statistics.grassMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Gishatich Move Count</td>
+                                        <td><%= statistics.xotakerMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Fish Move Count</td>
+                                        <td><%= statistics.fishMultiplyCount %></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                <!-- Table body -->
+                            </table>
+                            <!-- Table  -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!-- Card header -->
+                        <div class="card-header">Radar Chart</div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <canvas id="radarChart"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!-- Card header -->
+                        <div class="card-header">Doughnut Chart</div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <canvas id="doughnutChart"></canvas>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <!--Grid row-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+
+    <!-- Charts -->
+    <script>
+        // Line
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Grass", "Xotaker", "Fish", "Water","Water Grass"],
+                datasets: [{
+                    label: '# of Multiplies',
+                    data: [<%= statistics.grassMultiplyCount %>, <%= statistics.xotakerMultiplyCount %>,<%= statistics.fishMultiplyCount %>, <%= statistics.waterMultiplyCount %>,<%= statistics.waterGrassMultiplyCount %>],
+                    backgroundColor: [
+                        'rgba(50, 255, 0, 0.2)',
+                        'rgba(255, 255, 0, 0.2)',
+                        'rgba(75,0,130, 0.2)',
+                        'rgba(10,10,255,0.2)',
+                        'rgba(70,70,0,0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,255,255,1)',
+                        'rgba(255,255,255, 1)',
+                        'rgba(255,255,255, 1)',
+                        'rgba(255,255,255, 1)',
+                        'rgba(255,255,255, 1)'
+                    ],
+                    borderWidth: 5
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        //pie
+        var ctxP = document.getElementById("pieChart").getContext('2d');
+        var myPieChart = new Chart(ctxP, {
+            type: 'doughnut',
+            data: {
+                labels: [ "Grass", "Xotaker", "Gishatich", "Saruyc","Water","Fish","WaterGrass"],
+                datasets: [{
+                    data: [<%= statistics.grassCount %>, <%= statistics.xotakerCount %>, <%= statistics.gishatichCount %>, <%= statistics.saruycCount %>,<%= statistics.waterCount %>,<%= statistics.fishCount %>,<%= statistics.waterGrassCount %>],
+                    backgroundColor: ["Green", "Yellow", "#ffae00", "lightblue","blue","purple","rgb(70,70,0)"],
+                    hoverBackgroundColor: ["#00b300", "#ffff33", "#ffbe33", "#c4e3ed", "#3333ff", "#b300b3", "#666600"]
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: false
+            }
+        });
+
+        //radar
+        var ctxR = document.getElementById("radarChart").getContext('2d');
+        var myRadarChart = new Chart(ctxR, {
+            type: 'radar',
+            data: {
+                labels: ["Eating", "Drinking", "Dieing", "Moveing"],
+                datasets: [{
+                    label: "Xotaker",
+                    data: [<%= statistics.xotakerEatCount %>, 0, <%= statistics.xotakerDieCount %>, <%= statistics.xotakerMoveCount %>],
+                    backgroundColor: [
+                        'rgb(255,255,0,.5)',
+                    ],
+                    borderColor: [
+                        'black',
+                    ],
+                    borderWidth: 2
+                }, {
+                    label: "Gishatich",
+                    data: [<%= statistics.gishatichEatCount %>,<%= statistics.gishatichDrinkCount %>,<%= statistics.gishatichDieCount %>,<%= statistics.gishatichMoveCount %>],
+                    backgroundColor: [
+                        'rgba(255, 174, 0, .5)',
+                    ],
+                    borderColor: [
+                        'black',
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        //doughnut
+        var ctxD = document.getElementById("doughnutChart").getContext('2d');
+        var myLineChart = new Chart(ctxD, {
+            type: 'doughnut',
+            data: {
+                labels: [ "Grass", "Xotaker", "Gishatich", "Saruyc","Water","Fish","WaterGrass"],
+                datasets: [{
+                    data: [<%= statistics.grassCount %>, <%= statistics.xotakerCount %>, <%= statistics.gishatichCount %>, <%= statistics.saruycCount %>,<%= statistics.waterCount %>,<%= statistics.fishCount %>,<%= statistics.waterGrassCount %>],
+                    backgroundColor: ["Green", "Yellow", "#ffae00", "lightblue","blue","purple","rgb(70,70,0)"],
+                    hoverBackgroundColor: ["#00b300", "#ffff33", "#ffbe33", "#c4e3ed", "#3333ff", "#b300b3", "#666600"]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+
+</html>

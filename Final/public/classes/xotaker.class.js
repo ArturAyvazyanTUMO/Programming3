@@ -31,6 +31,7 @@ class Xotaker extends LivingCreature {
             for (var i in grassArr) {
                 if (grassArr[i].x == this.x && grassArr[i].y == this.y) {
                     grassArr.splice(i, 1);
+                    statistics.waterDieCount++;
                     break;
                 }
             }
