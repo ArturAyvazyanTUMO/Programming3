@@ -12,42 +12,42 @@ var socket = io();
 
 // Kecce maisi 9y
 
-var statistics={
-    fps:0,
-    windowWidth:0,
-    windowHeight:0,
-    side:0,
-    frameWhenEventWillPlay:0,
-    gameIsRunning:false,
-    eventWasPlayed:false,
-    grassCount:0,
-    xotakerCount:0,
-    gishatichCount:0,
-    saruycCount:0,
-    waterCount:0,
-    fishCount:0,
-    waterGrassCount:0,
-    grassMultiplyCount:0,
-    xotakerMultiplyCount:0,
-    fishMultiplyCount:0,
-    waterMultiplyCount:0,
-    waterGrassMultiplyCount:0,
-    grassDieCount:0,
-    xotakerDieCount:0,
-    gishatichDieCount:0,
-    saruycDieCount:0,
-    waterDieCount:0,
-    fishDieCount:0,
-    waterGrassDieCount:0,
-    xotakerEatCount:0,
-    gishatichEatCount:0,
-    gishatichDrinkCount:0,
-    fishEatCount:0,
-    xotakerMoveCount:0,
-    gishatichMoveCount:0,
-    fishMoveCount:0,
-    currentWeather:"",
-    framesPassed:0
+var statistics = {
+    fps: 0,
+    windowWidth: 0,
+    windowHeight: 0,
+    side: 0,
+    frameWhenEventWillPlay: 0,
+    gameIsRunning: false,
+    eventWasPlayed: false,
+    grassCount: 0,
+    xotakerCount: 0,
+    gishatichCount: 0,
+    saruycCount: 0,
+    waterCount: 0,
+    fishCount: 0,
+    waterGrassCount: 0,
+    grassMultiplyCount: 0,
+    xotakerMultiplyCount: 0,
+    fishMultiplyCount: 0,
+    waterMultiplyCount: 0,
+    waterGrassMultiplyCount: 0,
+    grassDieCount: 0,
+    xotakerDieCount: 0,
+    gishatichDieCount: 0,
+    saruycDieCount: 0,
+    waterDieCount: 0,
+    fishDieCount: 0,
+    waterGrassDieCount: 0,
+    xotakerEatCount: 0,
+    gishatichEatCount: 0,
+    gishatichDrinkCount: 0,
+    fishEatCount: 0,
+    xotakerMoveCount: 0,
+    gishatichMoveCount: 0,
+    fishMoveCount: 0,
+    currentWeather: "",
+    framesPassed: 0
 }
 
 var chance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 3, 4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -84,7 +84,7 @@ function setup() {
             matrix[y][x] = random(chance);
         }
     }
-    let fpsCount=30;
+    let fpsCount = 30;
     frameRate(fpsCount);
     var canvas = createCanvas(col * side, row * side);
     background('#acacac');
@@ -123,45 +123,45 @@ function setup() {
     textSize(50);
 
     //statistics part in setup function
-    statistics.fps=fpsCount;
-    statistics.windowWidth=windowWidth;
-    statistics.windowHeight=windowHeight;
-    statistics.side=side;
-    statistics.frameWhenEventWillPlay=whenUniqueEventWillPlay;
-    statistics.grassCount=grassArr.length;
-    statistics.xotakerCount=xotakerArr.length;
-    statistics.gishatichCount=gishatichArr.length;
-    statistics.saruycCount=saruycArr.length;
-    statistics.waterCount=waterArr.length;
-    statistics.fishCount=fishArr.length,
-    statistics.waterGrassCount=waterGrassArr.length;
+    statistics.fps = fpsCount;
+    statistics.windowWidth = windowWidth;
+    statistics.windowHeight = windowHeight;
+    statistics.side = side;
+    statistics.frameWhenEventWillPlay = whenUniqueEventWillPlay;
+    statistics.grassCount = grassArr.length;
+    statistics.xotakerCount = xotakerArr.length;
+    statistics.gishatichCount = gishatichArr.length;
+    statistics.saruycCount = saruycArr.length;
+    statistics.waterCount = waterArr.length;
+    statistics.fishCount = fishArr.length,
+    statistics.waterGrassCount = waterGrassArr.length;
 }
 
 function draw() {
     //statistics part in draw function
-    statistics.grassCount=grassArr.length;
-    statistics.xotakerCount=xotakerArr.length;
-    statistics.gishatichCount=gishatichArr.length;
-    statistics.saruycCount=saruycArr.length;
-    statistics.waterCount=waterArr.length;
-    statistics.fishCount=fishArr.length,
-    statistics.waterGrassCount=waterGrassArr.length;
-    statistics.framesPassed=TotalFramesPassed;
-    statistics.gameIsRunning=playGame;
-    statistics.currentWeather=currentWeather;
+    statistics.grassCount = grassArr.length;
+    statistics.xotakerCount = xotakerArr.length;
+    statistics.gishatichCount = gishatichArr.length;
+    statistics.saruycCount = saruycArr.length;
+    statistics.waterCount = waterArr.length;
+    statistics.fishCount = fishArr.length,
+        statistics.waterGrassCount = waterGrassArr.length;
+    statistics.framesPassed = TotalFramesPassed;
+    statistics.gameIsRunning = playGame;
+    statistics.currentWeather = currentWeather;
     //Send statistics
     textFont('Archivo Black');
     if (playGame) {
         weatherFramedPassed++;
         TotalFramesPassed++;
-        if(TotalFramesPassed%60==0){
+        if (TotalFramesPassed % 60 == 0) {
             socket.emit('get statistics', statistics);
         }
         noStroke();
         if (TotalFramesPassed == whenUniqueEventWillPlay) {
             evnt = new UniqueEvent(Math.floor(random(0, matrix[0].length - 1)), Math.floor(random(0, matrix.length - 1)));
             eventObjects.push(evnt);
-            statistics.eventWasPlayed=true;
+            statistics.eventWasPlayed = true;
         }
         if (weatherFramedPassed == 50) {
             changeWeather();
@@ -209,7 +209,7 @@ function draw() {
                     rect(x * side, y * side, side, side);
                 }
                 else if (matrix[y][x] == 8) {
-                    fill([70,70,0]);
+                    fill([70, 70, 0]);
                     rect(x * side, y * side, side, side);
                 }
                 else if (matrix[y][x] == 0) {
@@ -227,6 +227,14 @@ function draw() {
         if (conv2Dto1DArray(matrix).every((val, i, arr) => val == 6)) {
             fill(255);
             text("Game Over!", 10, 120);
+            statistics.grassCount = 0;
+            statistics.xotakerCount = 0;
+            statistics.gishatichCount = 0;
+            statistics.saruycCount = 0;
+            statistics.waterCount = 0;
+            statistics.fishCount = 0,
+            statistics.waterGrassCount = 0;
+            socket.emit('get statistics', statistics);
             playGame = false;
         }
 
@@ -237,7 +245,7 @@ function draw() {
             }
         }
 
-        for(var i in waterGrassArr){
+        for (var i in waterGrassArr) {
             waterGrassArr[i].bazmanal();
             statistics.waterGrassMultiplyCount++;
         }
