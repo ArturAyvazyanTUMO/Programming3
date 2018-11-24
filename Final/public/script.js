@@ -50,7 +50,7 @@ var statistics = {
     framesPassed: 0
 }
 
-var chance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 3, 4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var chance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 2, 3, 4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,];
 var side = 20;
 
 var possibleWeathers = ["Winter", "Spring", "Summer", "Autumn"]
@@ -245,9 +245,31 @@ function draw() {
             }
         }
 
+<<<<<<< HEAD
         for (var i in waterGrassArr) {
             waterGrassArr[i].bazmanal();
             statistics.waterGrassMultiplyCount++;
+=======
+        for(var i in waterGrassArr){
+            everythingIsGrass=true;
+            for(var j in waterGrassArr[i].directions){
+              if(matrix[waterGrassArr[i].directions[j][1]]){
+                if(matrix[waterGrassArr[i].directions[j][1]][waterGrassArr[i].directions[j][0]]){
+                  if(matrix[waterGrassArr[i].directions[j][1]][waterGrassArr[i].directions[j][0]]==5){
+                    everythingIsGrass=false;
+                  }
+                }
+              }
+            }
+            if(everythingIsGrass++)waterGrassArr[i].framesPassed++;
+            if(waterGrassArr[i].framesPassed>100){
+              convertTheCharacter(waterGrassArr,grassArr,Grass);
+              statistics.waterGrassDieCount++;
+            }else{
+              waterGrassArr[i].bazmanal();
+              statistics.waterGrassMultiplyCount++;
+            }
+>>>>>>> afb0e130af544ca863fd1db93462400b06a96adc
         }
 
         for (var i in xotakerArr) {

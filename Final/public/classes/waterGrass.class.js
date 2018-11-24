@@ -8,6 +8,7 @@ class WaterGrass extends LivingCreature {
             [this.x - 1, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+        this.framesPassed=0;
     }
 
     bazmanal() {
